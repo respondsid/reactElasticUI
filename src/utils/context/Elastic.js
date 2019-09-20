@@ -26,7 +26,7 @@ export default class Elastic {
   appendCheckedSelectionFilters(){
     if(this.elasticQuery){
       this.elasticQuery.prepareQuery();
-      this.elasticQuery.query.bool.should=[];
+      this.elasticQuery.query.bool.must=[];
     }
     if(this.aggregationResults){
       this.aggregationResults.forEach(aggregation=>{
@@ -34,7 +34,7 @@ export default class Elastic {
             aggregation.values.forEach(value=>{
               if(value.checked){
               const metadataField = new MetadataField(aggregation.field);
-              this.elasticQuery.query.bool.should.push(metadataField.getFilterQueryObject(value.key));
+              this.elasticQuery.query.bool.must.push(metadataField.getFilterQueryObject(value.key));
               }
             });
           }

@@ -17,7 +17,7 @@ export class ElasticQueryBuilder {
         if (!this.query.query) {
             this.query = {
                 'bool': {
-                    'should': []
+                    'must': []
                 }
             };
         }

@@ -6,14 +6,15 @@ import styled from 'styled-components'
 import { FaSearch } from "react-icons/fa";
 // Create a Wrapper component that'll render a <section> tag with some styles
 const Wrapper = styled(Container)`
+background-color:beige;
 `;
 
 const ContentColumn = styled(Col)`
 `;
 
 const SearchStyled = styled.div`
-  margin:5px;
-  padding:5px;
+  margin:1px;
+  padding:3px;
   
 `;
 
@@ -22,8 +23,8 @@ export default function Layout() {
   return (
     <React.Fragment>
       <Wrapper>
-      <Row>
-        <Col sm="12" md={{ size: 6, offset: 3 }}>
+      <Row style={{marginTop:'2em',paddingTop:'2em'}}>
+        <Col  sm="12" md={{ size: 6, offset: 3 }}>
         <InputGroup>
         <Input placeholder="username" />
         <InputGroupAddon addonType="append">
@@ -32,11 +33,11 @@ export default function Layout() {
       </InputGroup>
         </Col> 
       </Row>    
-      <Row>
-        <ContentColumn  xs="12" sm="3" md="3">
+      <Row style={{marginTop:'2em'}}>
+        <ContentColumn  xs="12" sm="4" md="4">
           <SearchStyled><SearchPane/></SearchStyled>
         </ContentColumn>
-        <ContentColumn  sm="9" xs="12" md="9">
+        <ContentColumn  sm="8" xs="12" md="8">
         <SearchStyled><SearchResultPane/></SearchStyled>
         </ContentColumn>
       </Row>

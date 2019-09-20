@@ -1,29 +1,33 @@
 import React, { useContext, useState } from "react";
 import ElasticContext from "./../utils/context/ElasticContext";
-import { Card, CardBody, Row, Col, Input } from "reactstrap";
+import { Card, CardBody, Row, Col, Input, Label } from "reactstrap";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 
-const AggregationValues = styled(Row)`
-  margin: 4px;
-  font-size: 10px;
-  display
+const AggregationValues = styled.div`
+  font-size: 11px;
+  display:flex;
 `;
 
-const AggregationValuesContainer = styled(Row)`
+const AggregationValuesContainer = styled.div`
   max-height: 150px;
   overflow-y: auto;
-  padding-top: 5px;
-  padding-left: 5px;
+  scroll-behavior:smooth;
 `;
+
+
+
+
 
 export default function SearchAggregation(props) {
   const context = useContext(ElasticContext);
   const [folded, setFolded] = useState(false);
 
+
+
   const drawHeaderSection = () => (
-    <Row>
+    <Row style={{margin:'4px'}}>
       <Col style={{ textAlign: "left" }}>
         {props.aggregation.field.display_label}
       </Col>
@@ -41,28 +45,28 @@ export default function SearchAggregation(props) {
 
   const drawAggregationValues = () => (
     <AggregationValuesContainer>
-      <Col>
+      <Col style={{marginTop:'1em'}} >
         {props.aggregation.values.map((v, index) => (
-          <AggregationValues key={index}>
-            <Col size="8" style={{ textAlign: "left" }}>
-              {v.displayLabel}
-            </Col>
+          <AggregationValues key={index} style={{justifyContent:'space-between'}} >
+            <div size="8" style={{justifyContent:'flex-start',marginLeft:'1em',marginRight:'1em'}}  className="custom-control custom-checkbox">
+              <Input
+                style={{ height: "8px", weight: "6px" }}
+                className="custom-control-input"
+                type="checkBox"
+                onClick={event => {
+                  v.checked = event.target.checked;
+                  context.performSearch();
+                }}
+                id={v.key}
+              />
+              <Label for={v.key} style={{justifyContent:'flex-start',marginRight:'1em',paddingTop:'3px'}} className="custom-control-label">
+                {v.displayLabel}
+              </Label>
+            </div>
 
-            <Col size="4">
-              <Row style={{ justifyContent: "flex-end" }}>
-                <Col style={{ float: "right" }}>({v.doc_count})</Col>
-                <Col>
-                  <Input
-                    style={{ height: "12px", weight: "12px" }}
-                    type="checkBox"
-                    onClick={(event) => {
-                      v.checked = event.target.checked;
-                      context.performSearch();
-                    }}
-                  />
-                </Col>
-              </Row>
-            </Col>
+            <div size="4" style={{justifyContent:'flex-end',marginRight:'2em'}}>
+              ({v.doc_count})
+            </div>
           </AggregationValues>
         ))}
       </Col>
