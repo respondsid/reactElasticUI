@@ -1,0 +1,39 @@
+PUT http://localhost:9200/accounts?pretty=true HTTP/1.1
+Content-Type: application/json
+
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "strings_as_keywords": {
+          "match_mapping_type": "string",
+          "mapping": {
+            "type": "text",
+            "fields":{
+                "raw":{
+                    "type":"keyword"
+                    }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+###
+POST http://localhost:9200/accounts/_bulk HTTP/1.1
+Content-Type: application/json
+
+< ./accounts.json 
+
+###
+GET http://localhost:9200/accounts
+
+###
+DELETE http://localhost:9200/accounts
+
+
+
+
+
