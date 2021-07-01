@@ -75,7 +75,7 @@ export default function SearchAggregation(props) {
   );
 
   return (
-    <div style={{ marginBottom: "6px" }}>
+    <div style={{ marginBottom: "1em" }}>
       <Card>
         <CardBody>
           {" "}

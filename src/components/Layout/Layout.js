@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { FaSearch } from "react-icons/fa";
 // Create a Wrapper component that'll render a <section> tag with some styles
 const Wrapper = styled(Container)`
-background-color:beige;
+background-color: cadetblue;
 `;
 
 const ContentColumn = styled(Col)`
