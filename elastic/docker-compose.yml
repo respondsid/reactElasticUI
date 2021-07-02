@@ -12,6 +12,11 @@ services:
       - es-net
     ports:
       - 9200:9200
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2048M
   kibana:
     container_name: kb-container
     image: docker.elastic.co/kibana/kibana:7.11.0
@@ -23,6 +28,15 @@ services:
       - elasticsearch
     ports:
       - 5601:5601
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+        reservations:
+          cpus: '0.5'
+          memory: 1024M  
+  
 networks:
   es-net:
     driver: bridge
