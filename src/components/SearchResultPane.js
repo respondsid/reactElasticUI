@@ -6,18 +6,31 @@ import { IoMdClose } from "react-icons/io";
 import SearchFacets from "./SearchFacets";
 
 const DetailValue = styled.div`
-  display: inline-block;
-  font-size: 12px;
+  font-size: 14px;
+  max-width:110px;
+  overflow:hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+  &:hover{
+   
+    overflow: visible; 
+    white-space: normal; 
+  }
+`;
+
+const TopResultContainer = styled(Row)`
+  border: 1px;
+  border-style: solid;
+  border-color: #96ad63;
+  margin-bottom: 1em;
+  &:hover {
+    background-color: #F9F9F9;
+  }
 `;
 
 const DetailLabel = styled.div`
   font-weight: bold;
-  display: inline-block;
-  justify-content: flex-start;
-  font-size: 12px;
-  word-wrap: none;
-  white-space: nowrap;
+  font-size: 14px;
 `;
 
 
@@ -29,7 +42,7 @@ export default function SearchResultPane(props) {
   
   const drawHeaderText = () => (
     <Row>
-      <Col>
+      <Col style={{"marginBottom":"1em"}}>
         {"Page "+context.elastic.pageNumber +
           " of " +
           context.elastic.totalNumberOfPages}
@@ -38,26 +51,27 @@ export default function SearchResultPane(props) {
   );
 
   const drawSearchResults = props => (
-    <Row>
-      <Col>
+    <div xs="1" sm="1" md="1" lg="1" >
+     
         {context.elastic.searchResults.map((result, index) => (
-          <Row key={index} style={{ paddingTop: "1em" }}>
-            <Card>
-              <CardBody>
-                <Row>
+          
+    
+            <TopResultContainer key={index}  xs="2" sm="2" md="3" lg="4">
+                
                   {Object.keys(result).map((key, index) => (
-                    <Col key={index} style={{ display: "flex" }}>
+                
+                    <Col key={index} style={{ display: "flex","justifyContent":"flex-start","padding":"0.50em" }}>
                       <DetailLabel>{key} : </DetailLabel>
-                      <DetailValue>{result[key]}</DetailValue>
+                      <DetailValue>{" " + result[key]}</DetailValue>
                     </Col>
+                     
                   ))}
-                </Row>
-              </CardBody>
-            </Card>
-          </Row>
+                
+            </TopResultContainer>
+    
         ))}
-      </Col>
-    </Row>
+   
+    </div>
   );
   return (
     <div>

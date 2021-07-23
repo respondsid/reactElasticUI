@@ -128,8 +128,7 @@ export default class Elastic {
             f => f.field_name === key
           );
           if (metadataField) {
-            newResponseDocument.key = metadataField.display_label;
-            newResponseDocument[metadataField.display_label] =
+             newResponseDocument[metadataField.display_label] =
               responseDocument[key];
           } else {
             newResponseDocument.key = key;
