@@ -32,7 +32,7 @@ export default function SearchDashBoard(props) {
     const url =
       "http://localhost:9200/" +
       queryObj.getCollection() +
-      "/_search" +
+      "/_search" +(elasticContext.elastic.queryText && elasticContext.elastic.queryText!==''?"?q='"+elasticContext.elastic.queryText+"'":"")+
       (queryObj != null ? queryObj.getMultiFieldQueryStr() : "");
     fetch(url, {
       method: "POST",
@@ -61,7 +61,7 @@ export default function SearchDashBoard(props) {
       elasticResponse.responseDocuments.push(element._source);
     });
     if (result.aggregations) {
-      const responseAggregations: ElasticAggregationResult[] = [];
+      const responseAggregations = [];
       Object.keys(result.aggregations).map(key => {
         const elasticAggregation: ElasticAggregationResult = new ElasticAggregationResult();
         elasticAggregation.name = key;

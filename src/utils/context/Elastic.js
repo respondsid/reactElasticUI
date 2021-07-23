@@ -80,7 +80,9 @@ export default class Elastic {
     }
   }
 
-
+ setTextQuery(queryText){
+   this.elasticQuery.queryText=queryText;
+ }
 
 
   mergeAggregations(newAggregations) {

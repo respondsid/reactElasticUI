@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Row, Col,Container,Input,InputGroup,InputGroupAddon,InputGroupText} from 'reactstrap';
 import SearchPane from "../SearchPane";
 import SearchResultPane from "../SearchResultPane";
 import styled from 'styled-components'
 import { FaSearch } from "react-icons/fa";
+import ElasticContext from '../../utils/context/ElasticContext';
 // Create a Wrapper component that'll render a <section> tag with some styles
 const Wrapper = styled(Container)`
 background-color: cadetblue;
@@ -20,15 +21,20 @@ const SearchStyled = styled.div`
 
 
 export default function Layout() {
+  const context = useContext(ElasticContext);
   return (
     <React.Fragment>
       <Wrapper>
       <Row style={{marginTop:'2em',paddingTop:'2em'}}>
         <Col  sm="12" md={{ size: 6, offset: 3 }}>
         <InputGroup>
-        <Input placeholder="username" />
+        <Input placeholder="username" onChange={(event)=>{
+              context.elastic.queryText =event.target.value;
+        }}/>
         <InputGroupAddon addonType="append">
-          <InputGroupText><FaSearch/></InputGroupText>
+          <InputGroupText><FaSearch  onClick={()=>{
+              context.performSearch();
+        }}/></InputGroupText>
         </InputGroupAddon>
       </InputGroup>
         </Col> 
