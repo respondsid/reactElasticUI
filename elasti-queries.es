@@ -102,7 +102,11 @@ GET accounts/_search?q='hill'
             }
         }
     },
-    
+    "query": {
+        "bool": {
+            "must": []
+        }
+    },
     "size": 20,
-    "from": 1
+    "from": 0
 }
