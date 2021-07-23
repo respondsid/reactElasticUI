@@ -11,15 +11,14 @@ export default function SearchPane() {
       <SearchAggregation key={index} aggregation={aggregation}/>
     ));
   return (
-    <Row> 
-      <Col>
+    <div>
         {context.elastic &&
         context.elastic.aggregationResults &&
         context.elastic.aggregationResults.length > 0 ?
           drawAgreegationItemSection()
          : <div>loading</div>
         }
-      </Col>
-    </Row>
+      
+    </div>
   );
 }

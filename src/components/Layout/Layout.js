@@ -14,8 +14,7 @@ const ContentColumn = styled(Col)`
 `;
 
 const SearchStyled = styled.div`
-  margin:1px;
-  padding:3px;
+  
   
 `;
 

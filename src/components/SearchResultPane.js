@@ -74,7 +74,7 @@ export default function SearchResultPane(props) {
     </div>
   );
   return (
-    <div>
+    
       <Card>
         <CardBody>
           {!loaded ? (
@@ -93,6 +93,5 @@ export default function SearchResultPane(props) {
           </Row>
         </CardBody>
       </Card>
-    </div>
-  );
+   );
 }
