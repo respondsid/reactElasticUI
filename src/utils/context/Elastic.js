@@ -59,6 +59,14 @@ export default class Elastic {
     if (data && data.responseDocuments.length > 0) {
       this.searchResults = this.changeKeys(data.responseDocuments);
       this.elasticQuery.total = data.total;
+      if(this.searchResults.length>data.total){
+        this.pageNumber=1;
+        this.totalNumberOfPages=1;
+      }else{
+        this.pageNumber=1;
+
+        this.totalNumberOfPages=Math.ceil(data.total/this.elasticQuery.size);
+      }
     }
     if (data && data.responseAggregations.length > 0) {
       this.mergeAggregations(data.responseAggregations);

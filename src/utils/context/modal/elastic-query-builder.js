@@ -4,7 +4,7 @@ export class ElasticQueryBuilder {
         this.query = {};
         this.aggs = {};
         this.size = 20;
-        this.from = 1;
+        this.from = 0;
         this.collection='';
         this.toJson=this.toJson.bind(this);
         this.resetQuery=this.resetQuery.bind(this);

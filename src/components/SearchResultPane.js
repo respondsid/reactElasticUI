@@ -30,9 +30,9 @@ export default function SearchResultPane(props) {
   const drawHeaderText = () => (
     <Row>
       <Col>
-        {context.elastic.searchResults.length +
+        {"Page "+context.elastic.pageNumber +
           " of " +
-          context.elastic.elasticQuery.total}
+          context.elastic.totalNumberOfPages}
       </Col>
     </Row>
   );

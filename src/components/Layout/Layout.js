@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import ElasticContext from '../../utils/context/ElasticContext';
 // Create a Wrapper component that'll render a <section> tag with some styles
 const Wrapper = styled(Container)`
-background-color: cadetblue;
+background-color: #96ad63;
 `;
 
 const ContentColumn = styled(Col)`
