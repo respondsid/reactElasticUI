@@ -60,7 +60,7 @@ const FacetContainer = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: #96ad63;
+    background-color: #777ff7;
     font-weight: bold;
     color: #ffffff;
   }

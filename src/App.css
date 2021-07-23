@@ -1,7 +1,11 @@
 .App {
   text-align: center;
   background-color: #FFFFFF;
+
+    font-family: 'Open Sans', sans-serif;
 }
+
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

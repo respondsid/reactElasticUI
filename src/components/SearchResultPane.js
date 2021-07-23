@@ -20,11 +20,11 @@ const DetailValue = styled.div`
 
 const TopResultContainer = styled(Row)`
   border: 1px;
-  border-style: solid;
-  border-color: #96ad63;
-  margin-bottom: 1em;
+  border-style: dotted;
+  border-color: #777ff7;
+  margin-bottom: 0.5em;
   &:hover {
-    background-color: #F9F9F9;
+    background-color: #f2f3ff;
   }
 `;
 
