@@ -21,6 +21,15 @@ export class ElasticQueryBuilder {
                 }
             };
         }
+        if(this.queryText && this.queryText!==''){
+            this.query.bool.must.push(
+            {
+                "multi_match": {
+                    "query": this.queryText,
+                    "type": "most_fields"
+                }
+            });
+        }
     }
 
     prepareMultiFieldQuery(term) {

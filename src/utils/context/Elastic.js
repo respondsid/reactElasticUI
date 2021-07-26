@@ -26,7 +26,7 @@ export default class Elastic {
   appendCheckedSelectionFilters(){
     if(this.elasticQuery){
       this.elasticQuery.prepareQuery();
-      this.elasticQuery.query.bool.must=[];
+     // this.elasticQuery.query.bool.must=[];
     }
     if(this.aggregationResults){
       this.aggregationResults.forEach(aggregation=>{

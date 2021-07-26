@@ -32,7 +32,7 @@ export default function SearchDashBoard(props) {
     const url =
       "http://localhost:9200/" +
       queryObj.getCollection() +
-      "/_search" +(elasticContext.elastic.queryText && elasticContext.elastic.queryText!==''?"?q='"+elasticContext.elastic.queryText+"'":"")+
+      "/_search" +
       (queryObj != null ? queryObj.getMultiFieldQueryStr() : "");
     fetch(url, {
       method: "POST",

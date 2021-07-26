@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import ElasticContext from '../../utils/context/ElasticContext';
 // Create a Wrapper component that'll render a <section> tag with some styles
 const Wrapper = styled(Container)`
-background-color: #638ff7;
+background-color: #89a2f0;
 `;
 
 const ContentColumn = styled(Col)`
@@ -28,7 +28,7 @@ export default function Layout() {
         <Col  sm="12" md={{ size: 6, offset: 3 }}>
         <InputGroup>
         <Input placeholder="username" onChange={(event)=>{
-              context.elastic.queryText =event.target.value;
+              context.elastic.elasticQuery.queryText =event.target.value;
         }}/>
         <InputGroupAddon addonType="append">
           <InputGroupText><FaSearch  onClick={()=>{

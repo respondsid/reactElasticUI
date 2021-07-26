@@ -21,7 +21,7 @@ const DetailValue = styled.div`
 const TopResultContainer = styled(Row)`
   border: 1px;
   border-style: dotted;
-  border-color: #638ff7;
+  border-color: #89a2f0;
   margin-bottom: 0.5em;
   &:hover {
     background-color: #f2f3ff;

@@ -55,12 +55,12 @@ const FacetContainer = styled.div`
   display: flex;
   border: solid #dbdbdb 1px;
   padding: 2px 5px 2px 5px;
-  border-radius: 15px;
+  border-radius: 7px;
   margin: 5px;
 
   &:hover {
     cursor: pointer;
-    background-color: #638ff7;
+    background-color: #89a2f0;
     font-weight: bold;
     color: #ffffff;
   }
