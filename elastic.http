@@ -28,6 +28,37 @@ Content-Type: application/json
 < ./accounts.json 
 
 ###
+
+PUT http://localhost:9200/employees?pretty=true HTTP/1.1
+Content-Type: application/json
+
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "strings_as_keywords": {
+          "match_mapping_type": "string",
+          "mapping": {
+            "type": "text",
+            "fields":{
+                "raw":{
+                    "type":"keyword"
+                    }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+###
+POST http://localhost:9200/employees/_bulk HTTP/1.1
+Content-Type: application/json
+
+< ./EmployeesSample.json
+
+###
 GET http://localhost:9200/accounts
 
 ###
@@ -42,3 +73,4 @@ Content-Type: application/json
 {"_source":["account_number","firstname","lastname","gender","employer","age","Address","email","state","balance"],"aggs":{"gender":{"terms":{"field":"gender.raw","size":100}},"employer":{"terms":{"field":"employer.raw","size":100}},"age":{"range":{"field":"age","ranges":[{"to":20},{"from":10,"to":30},{"from":30,"to":60},{"from":60}]}},"state":{"terms":{"field":"state.raw","size":100}},"balance":{"range":{"field":"balance","ranges":[{"to":"6000"},{"from":"6000","to":"15000"},{"from":"15000","to":"45000"},{"from":"45000"}]}}},"query":{"bool":{"must":[]}},"size":20,"from":1}
 
 ###
+GET http://localhost:9200/employees

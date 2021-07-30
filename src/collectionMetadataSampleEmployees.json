@@ -1,0 +1,106 @@
+[
+  {
+    "field_id": "Address",
+    "field_name": "Address",
+    "display_label": "Address",
+    "field_type": "MULTI",
+    "facet_ind": "false",
+    "collection": "employees"
+  },
+  {
+    "field_id": "FirstName",
+    "field_name": "FirstName",
+    "display_label": "First Name",
+    "field_type": "MULTI",
+    "facet_ind": "false",
+    "collection": "employees"
+  },
+  {
+    "field_id": "LastName",
+    "field_name": "LastName",
+    "display_label": "Last Name",
+    "field_type": "MULTI",
+    "facet_ind": "false",
+    "collection": "employees"
+  },
+  {
+    "field_id": "Gender",
+    "field_name": "Gender",
+    "display_label": "Gender",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "employees"
+  },
+  {
+    "field_id": "Designation",
+    "field_name": "Designation",
+    "display_label": "Designation",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "employees"
+  },
+
+  {
+    "field_id": "Age",
+    "field_name": "Age",
+    "display_label": "Age",
+    "field_type": "RANGE",
+    "range": [
+      { "to": 20, "key": " Younger than 20" },
+      { "from": 10, "to": 30, "key": "Betwen 20  and 30 " },
+      { "from": 30, "to": 60, "key": "Between 30  and 60" },
+      { "from": 60, "key": "More than 60" }
+    ],
+    "facet_ind": "true",
+    "collection": "employees",
+    "raw_ind": "false"
+  },
+  {
+    "field_id": "Address",
+    "field_name": "Address",
+    "display_label": "Address",
+    "field_type": "MULTI",
+    "facet_ind": "false",
+    "collection": "employees"
+  },
+  {
+    "field_id": "MaritalStatus",
+    "field_name": "MaritalStatus",
+    "display_label": "Marital Status",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "employees"
+  },
+  {
+    "field_id": "Interests",
+    "field_name": "Interests",
+    "display_label": "Interests",
+    "field_type": "Multi",
+    "facet_ind": "false",
+    "collection": "employees"
+  },
+  {
+    "field_id": "Salary",
+    "field_name": "Salary",
+    "display_label": "Salary",
+    "field_type": "MULTI",
+    "facet_ind": "false",
+    "collection": "employees",
+    "raw_ind": "false"
+  },
+  {
+    "field_id": "DateOfJoining",
+    "field_name": "DateOfJoining",
+    "display_label": "Joining Date",
+    "field_type": "RANGE",
+    "range": [
+      { "from": "now-5y","to":"now","key": "Less than 5 Year" },
+      { "from":"now-10y","to":"now-5y","key": "Between 10 and 5 years old" },
+      { "from":"now-15y","to":"now-10y","key": "Between 15 and 10 years  old" },
+      { "to": "now-15y", "key": "More than 15 years old" }
+    ],
+    "facet_ind": "true",
+    "collection": "employees",
+    "raw_ind": "false"
+  }
+]

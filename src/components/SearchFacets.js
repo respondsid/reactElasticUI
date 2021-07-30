@@ -7,6 +7,7 @@ const FacetAggregationContainer = styled.div`
   display: flex;
   font-size: 9px;
   flex-wrap: wrap;
+  margin-bottom: 1em;
 `;
 
 const AggregationDisplayContainer = styled.div`

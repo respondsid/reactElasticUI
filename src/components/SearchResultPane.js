@@ -50,11 +50,15 @@ export default function SearchResultPane(props) {
 
   
   const drawHeaderText = () => (
-    <Row>
-      <Col style={{"marginBottom":"1em"}}>
+    <Row style={{"marginBottom":"2em","justifyContent":"space-between","fontSize":"8px","fontWeight":"bold"}}>
+      <Col style={{"flexGrow":"0.15"}}>
         {"Page "+context.elastic.pageNumber +
           " of " +
           context.elastic.totalNumberOfPages}
+      </Col>
+      <Col style={{"flexGrow":"0.15"}}>
+        {"Total: "+context.elastic.elasticQuery.total +
+          " record(s) " }
       </Col>
     </Row>
   );
