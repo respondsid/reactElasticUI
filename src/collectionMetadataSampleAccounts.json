@@ -2,7 +2,7 @@
   {
     "field_id": "account_number",
     "field_name": "account_number",
-    "display_label": "Account Number Testing",
+    "display_label": "Account Number",
     "field_type": "MULTI",
     "facet_ind": "false",
     "collection": "accounts"
@@ -46,10 +46,10 @@
     "display_label": "Age",
     "field_type": "RANGE",
     "range": [
-      { "to": 20, "key": " < 20" },
-      { "from": 10, "to": 30, "key": "> 20  and 30 <" },
-      { "from": 30, "to": 60, "key": "> 30  and 60 <" },
-      { "from": 60, "key": "> 60" }
+      { "to": 20, "key": " Less than 20" },
+      { "from": 10, "to": 30, "key": "Between 20  and 30" },
+      { "from": 30, "to": 60, "key": "Beetween 30  and 60" },
+      { "from": 60, "key": "More than 60" }
     ],
     "facet_ind": "true",
     "collection": "accounts",
@@ -82,13 +82,13 @@
   {
     "field_id": "balance",
     "field_name": "balance",
-    "display_label": "Balance",
+    "display_label": "Account Balance",
     "field_type": "RANGE",
     "range": [
-      { "to": "6000", "key": "60,000$ <" },
-      { "from": "6000", "to": "15000", "key": "> 6,000$ and  15,000$ <" },
-      { "from": "15000", "to": "45000", "key": ">$15,000 and  $45,000 <" },
-      { "from": "45000", "key": "> $45,000" }
+      { "to": "6000", "key": "Less than $6,000" },
+      { "from": "6000", "to": "15000", "key": "Between $6,000$ and  $15,000" },
+      { "from": "15000", "to": "45000", "key": "Between $15,000 and $45,000" },
+      { "from": "45000", "key": "More than $45,000" }
     ],
     "facet_ind": "true",
     "collection": "accounts",
