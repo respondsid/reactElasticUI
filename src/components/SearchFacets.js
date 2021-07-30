@@ -91,7 +91,7 @@ export default function SearchFacets() {
 
   const displaySelection = v => (
     <FacetContainer>
-      <FacetContainerText>{v.displayLabel}</FacetContainerText>
+      <FacetContainerText>{v.key}</FacetContainerText>
       <FacetContainerIcon>
         <IoMdClose
           onClick={event => {

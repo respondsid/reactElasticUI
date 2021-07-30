@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import SearchFacets from "./SearchFacets";
 
 const DetailValue = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   max-width:110px;
   overflow:hidden;
   text-overflow: ellipsis;
@@ -29,8 +29,17 @@ const TopResultContainer = styled(Row)`
 `;
 
 const DetailLabel = styled.div`
+  font-size: 12px;
+  max-width:110px;
+  overflow:hidden;
+  text-overflow: ellipsis;
   font-weight: bold;
-  font-size: 14px;
+  white-space: nowrap;
+  &:hover{
+   
+    overflow: visible; 
+    white-space: normal; 
+  }
 `;
 
 

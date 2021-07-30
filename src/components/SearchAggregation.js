@@ -61,7 +61,7 @@ export default function SearchAggregation(props) {
               checked={v.checked}
               />
               <Label for={v.key} style={{justifyContent:'flex-start',marginRight:'1em',paddingTop:'3px'}} className="custom-control-label">
-                {v.displayLabel}
+                {v.key}
               </Label>
             </div>
 

@@ -63,11 +63,9 @@ export default function SearchDashBoard(props) {
     if (result.aggregations) {
       const responseAggregations = [];
       Object.keys(result.aggregations).map(key => {
-        const elasticAggregation: ElasticAggregationResult = new ElasticAggregationResult();
+        const elasticAggregation = new ElasticAggregationResult();
         elasticAggregation.name = key;
-        elasticAggregation.values = result.aggregations[key].buckets.map(
-          v => new ElasticAggregationField(v.key, v.doc_count)
-        );
+        elasticAggregation.values = result.aggregations[key].buckets;
         responseAggregations.push(elasticAggregation);
       });
       elasticResponse.responseAggregations = responseAggregations;

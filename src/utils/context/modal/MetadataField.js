@@ -1,3 +1,6 @@
+import { FaRegKeyboard } from "react-icons/fa";
+import { keyframes } from "styled-components";
+
 export class MetadataField {
     constructor(obj) {
         this.field_id = obj.field_id;
@@ -22,7 +25,7 @@ export class MetadataField {
                 return obj;
             } else {
                 const obj = {range:{field:this.getFieldName()}};
-                obj.range.ranges = this.range.map(item => JSON.parse(item.replace('\\', '')));
+                obj.range.ranges = this.range;
                 obj.range.ranges.size = 100;
                 return obj;
             }
@@ -33,19 +36,14 @@ export class MetadataField {
     getFilterQueryObject(value) {
         if (this.facet_ind) {
             if (this.field_type !== 'RANGE') {
-                const obj = JSON.parse('{"term":{"' + this.getFieldName() + '":"' + value + '"}}');
+                const obj = JSON.parse('{"term":{"' + this.getFieldName() + '":"' + value.key + '"}}');
                 return obj;
             } else {
                 const obj = {};
                 obj.range = {}
                 obj.range[this.getFieldName()] = {};
-                const ranges = value.split('-');
-                if (ranges[0] !== '*') {
-                    obj.range[this.getFieldName()].gte = ranges[0];
-                }
-                if (ranges[1] !== '*') {
-                    obj.range[this.getFieldName()].lte = ranges[1];
-                }
+                obj.range[this.getFieldName()].gte = value?.from;
+                obj.range[this.getFieldName()].lte = value?.to;
                 return obj;
 
             }
