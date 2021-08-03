@@ -13,24 +13,20 @@ const FacetAggregationContainer = styled.div`
 const AggregationDisplayContainer = styled.div`
   display: flex;
   flex-direction: column;
-  
 `;
 
 const AggregationDisplayLabelContainer = styled.div`
   position: absolute;
   margin-left: 3px;
   margin-top: -8px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding-left: 2px;
-  padding-right:2px;
+  padding-right: 2px;
 `;
 const AggregationDisplayLabelBlankContainer = styled.div`
   position: absolute;
   margin-top: -8px;
-  
 `;
-
-const AggregationContainer = styled.div``;
 
 const AggregationFirstContainer = styled.div`
   border-top: solid #dbdbdb 1px;
@@ -77,25 +73,24 @@ const FacetContainerIcon = styled.div`
   padding-bottom: 3px;
 `;
 export default function SearchFacets() {
-    const context = useContext(ElasticContext);
-    const loaded = context.elastic.searchResults ? true : false;
+  const context = useContext(ElasticContext);
 
-    const isSelected = aggregation =>
-    aggregation.values.filter(v => v.checked === true).length !== 0;
+  const isSelected = (aggregation) =>
+    aggregation.values.filter((v) => v.checked === true).length !== 0;
 
-  const selectedAggregation = aggregation =>
-    aggregation.values.filter(v => v.checked === true);
+  const selectedAggregation = (aggregation) =>
+    aggregation.values.filter((v) => v.checked === true);
 
-  const isAnyFacetSelected = aggregationResults =>
-    aggregationResults.filter(aggregation => isSelected(aggregation)).length !==
-    0;
+  const isAnyFacetSelected = (aggregationResults) =>
+    aggregationResults.filter((aggregation) => isSelected(aggregation))
+      .length !== 0;
 
-  const displaySelection = v => (
+  const displaySelection = (v) => (
     <FacetContainer>
       <FacetContainerText>{v.key}</FacetContainerText>
       <FacetContainerIcon>
         <IoMdClose
-          onClick={event => {
+          onClick={(event) => {
             v.checked = event.target.checked;
             context.performSearch();
           }}
@@ -104,10 +99,10 @@ export default function SearchFacets() {
     </FacetContainer>
   );
 
-  const drawAggregation = aggregation => (
-    <div style={{display:'flex',marginLeft:'2px'}}>
+  const drawAggregation = (aggregation) => (
+    <div style={{ display: "flex", marginLeft: "2px" }}>
       {selectedAggregation(aggregation).map((v, index, aggr) => (
-        <AggregationDisplayContainer>
+        <AggregationDisplayContainer key={"agg" + index}>
           {index === 0 ? (
             <AggregationDisplayLabelContainer>
               {aggregation.field.display_label}
@@ -118,7 +113,7 @@ export default function SearchFacets() {
             </AggregationDisplayLabelBlankContainer>
           )}
           <div>
-            {index === 0 && aggr.length == 1 ? (
+            {index === 0 && aggr.length === 1 ? (
               <AggregationOneContainer>
                 {displaySelection(v)}
               </AggregationOneContainer>
@@ -147,7 +142,10 @@ export default function SearchFacets() {
       isAnyFacetSelected(context.elastic.aggregationResults) ? (
         <FacetAggregationContainer>
           {context.elastic.aggregationResults.map((aggregation, index) => (
-            <React.Fragment> {drawAggregation(aggregation)}</React.Fragment>
+            <React.Fragment key={"dAggr" + index}>
+              {" "}
+              {drawAggregation(aggregation)}
+            </React.Fragment>
           ))}
         </FacetAggregationContainer>
       ) : (
@@ -156,10 +154,5 @@ export default function SearchFacets() {
     </React.Fragment>
   );
 
-
-    return (
-        <React.Fragment>
-            {drawFacets()}
-        </React.Fragment>
-    )
+  return <React.Fragment>{drawFacets()}</React.Fragment>;
 }

@@ -1,6 +1,5 @@
-import React from 'react'
+import React from "react";
 
 const ElasticContext = React.createContext();
 
 export default ElasticContext;
-

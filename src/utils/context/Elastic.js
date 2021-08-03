@@ -5,52 +5,53 @@ export default class Elastic {
   constructor(metadataFields) {
     this.elasticQuery = new ElasticQueryBuilder();
     this.metadataFields = metadataFields;
-    this.searchResults=null;
-    this.aggregationResults=[];
-    this.initializeElasticFromMetadata = this.initializeElasticFromMetadata.bind(
-      this
-    );
+    this.searchResults = null;
+    this.aggregationResults = [];
+    this.initializeElasticFromMetadata =
+      this.initializeElasticFromMetadata.bind(this);
     this.getElasticQuery = this.getElasticQuery.bind(this);
-    this.initializeElasticFromSearch = this.initializeElasticFromSearch.bind(
-      this
-    );
+    this.initializeElasticFromSearch =
+      this.initializeElasticFromSearch.bind(this);
     this.populateAggregationFields = this.populateAggregationFields.bind(this);
-    this.appendCheckedSelectionFilters = this.appendCheckedSelectionFilters.bind(this);
+    this.appendCheckedSelectionFilters =
+      this.appendCheckedSelectionFilters.bind(this);
     this.mergeAggregations = this.mergeAggregations.bind(this);
     this.initializeElasticFromMetadata();
   }
+
   getElasticQuery() {
     return this.elasticQuery;
   }
 
-  appendCheckedSelectionFilters(){
-    if(this.elasticQuery){
+  appendCheckedSelectionFilters() {
+    if (this.elasticQuery) {
       this.elasticQuery.prepareQuery();
-     // this.elasticQuery.query.bool.must=[];
+      // this.elasticQuery.query.bool.must=[];
     }
-    if(this.aggregationResults){
-      this.aggregationResults.forEach(aggregation=>{
-          if(aggregation.field && aggregation.values){
-            aggregation.values.forEach(value=>{
-              if(value.checked){
+    if (this.aggregationResults) {
+      this.aggregationResults.forEach((aggregation) => {
+        if (aggregation.field && aggregation.values) {
+          aggregation.values.forEach((value) => {
+            if (value.checked) {
               const metadataField = new MetadataField(aggregation.field);
-              this.elasticQuery.query.bool.must.push(metadataField.getFilterQueryObject(value));
-              }
-            });
-          }
+              this.elasticQuery.query.bool.must.push(
+                metadataField.getFilterQueryObject(value)
+              );
+            }
+          });
+        }
       });
     }
   }
 
   initializeElasticFromMetadata() {
-    this.metadataFields.forEach(element => {
+    this.metadataFields.forEach((element) => {
       const metadataField = new MetadataField(element);
       this.elasticQuery._source.push(metadataField.field_name);
       this.elasticQuery.collection = metadataField.collection;
       if (metadataField.facet_ind && metadataField.facet_ind === "true") {
-        this.elasticQuery.aggs[
-          metadataField.field_name
-        ] = metadataField.getAggregationObject();
+        this.elasticQuery.aggs[metadataField.field_name] =
+          metadataField.getAggregationObject();
       }
     });
   }
@@ -59,13 +60,15 @@ export default class Elastic {
     if (data && data.responseDocuments.length > 0) {
       this.searchResults = this.changeKeys(data.responseDocuments);
       this.elasticQuery.total = data.total;
-      if(this.searchResults.length>data.total){
-        this.pageNumber=1;
-        this.totalNumberOfPages=1;
-      }else{
-        this.pageNumber=1;
+      if (this.searchResults.length > data.total) {
+        this.pageNumber = 1;
+        this.totalNumberOfPages = 1;
+      } else {
+        this.pageNumber = 1;
 
-        this.totalNumberOfPages=Math.ceil(data.total/this.elasticQuery.size);
+        this.totalNumberOfPages = Math.ceil(
+          data.total / this.elasticQuery.size
+        );
       }
     }
     if (data && data.responseAggregations.length > 0) {
@@ -75,8 +78,8 @@ export default class Elastic {
 
   populateAggregationFields() {
     if (this.aggregationResults) {
-      this.aggregationResults.forEach(el => {
-        el.field = this.metadataFields.find(f => el.name === f.field_name);
+      this.aggregationResults.forEach((el) => {
+        el.field = this.metadataFields.find((f) => el.name === f.field_name);
         if (el.field.field_type === "RANGE") {
           el.values.forEach((v, i) => {
             if (el.field.range_label && el.field.range_label[i]) {
@@ -88,23 +91,21 @@ export default class Elastic {
     }
   }
 
- setTextQuery(queryText){
-   this.elasticQuery.queryText=queryText;
- }
-
+  setTextQuery(queryText) {
+    this.elasticQuery.queryText = queryText;
+  }
 
   mergeAggregations(newAggregations) {
     if (this.aggregationResults && newAggregations) {
       const mergedAggregations = [];
-      newAggregations.forEach(element => {
+      newAggregations.forEach((element) => {
         let newAggregationResult = element;
         const existingAggregationResult = this.aggregationResults.filter(
-          X => X.name === element.name
+          (X) => X.name === element.name
         )[0];
         if (existingAggregationResult) {
-          const existingAggregationChecekd = existingAggregationResult.values.filter(
-            f => f.checked
-          )[0];
+          const existingAggregationChecekd =
+            existingAggregationResult.values.filter((f) => f.checked)[0];
           if (existingAggregationChecekd) {
             newAggregationResult = existingAggregationResult;
           }
@@ -120,15 +121,15 @@ export default class Elastic {
 
   changeKeys(responseDocuments) {
     if (this.metadataFields && responseDocuments) {
-      let newResponseDocuments = [];
-      responseDocuments.forEach(responseDocument => {
-        let newResponseDocument = {};
-        for (let key of Object.keys(responseDocument)) {
-          let metadataField = this.metadataFields.find(
-            f => f.field_name === key
+      const newResponseDocuments = [];
+      responseDocuments.forEach((responseDocument) => {
+        const newResponseDocument = {};
+        for (const key of Object.keys(responseDocument)) {
+          const metadataField = this.metadataFields.find(
+            (f) => f.field_name === key
           );
           if (metadataField) {
-             newResponseDocument[metadataField.display_label] =
+            newResponseDocument[metadataField.display_label] =
               responseDocument[key];
           } else {
             newResponseDocument.key = key;
@@ -141,5 +142,4 @@ export default class Elastic {
     }
     return responseDocuments;
   }
-
 }

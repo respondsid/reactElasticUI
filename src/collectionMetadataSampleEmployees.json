@@ -94,9 +94,17 @@
     "display_label": "Joining Date",
     "field_type": "RANGE",
     "range": [
-      { "from": "now-5y","to":"now","key": "Less than 5 Year" },
-      { "from":"now-10y","to":"now-5y","key": "Between 10 and 5 years old" },
-      { "from":"now-15y","to":"now-10y","key": "Between 15 and 10 years  old" },
+      { "from": "now-5y", "to": "now", "key": "Less than 5 Year" },
+      {
+        "from": "now-10y",
+        "to": "now-5y",
+        "key": "Between 10 and 5 years old"
+      },
+      {
+        "from": "now-15y",
+        "to": "now-10y",
+        "key": "Between 15 and 10 years  old"
+      },
       { "to": "now-15y", "key": "More than 15 years old" }
     ],
     "facet_ind": "true",

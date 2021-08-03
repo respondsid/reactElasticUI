@@ -1,34 +1,29 @@
-import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import Elastic from "../utils/context/Elastic";
-import ElasticResponse from "./../utils/context/modal/elastic-response";
-import ElasticAggregationField from "./../utils/context/modal/elastic-aggregation-field";
-import ElasticAggregationResult from "./../utils/context/modal/elastic-aggregation-item";
 import ElasticContext from "./../utils/context/ElasticContext";
+import ElasticAggregationResult from "./../utils/context/modal/elastic-aggregation-item";
+import ElasticResponse from "./../utils/context/modal/elastic-response";
 
-export default function SearchDashBoard(props) {
+function SearchDashBoard(props) {
   const [elasticContext, setElasticContext] = useState({
-    elastic: new Elastic(props.metadataFields)
+    elastic: new Elastic(props.metadataFields),
   });
-
-  const [changedSelection, setChangedSelection] = useState(false);
 
   useEffect(() => {
     performSearch();
   }, []);
 
- /* const updateElasticContext = elastic => {
+  /* const updateElasticContext = elastic => {
     setElasticContext(prevElasticContext => {
       const mergedContext = { ...prevElasticContext.elastic, ...elastic };
       return {elastic: mergedContext };
     });
-  };*/
+  }; */
 
-  
-
-
-  const performSearch=()=>{
+  const performSearch = () => {
     elasticContext.elastic.appendCheckedSelectionFilters();
-    let queryObj = elasticContext.elastic.getElasticQuery();
+    const queryObj = elasticContext.elastic.getElasticQuery();
     const url =
       "http://localhost:9200/" +
       queryObj.getCollection() +
@@ -37,32 +32,32 @@ export default function SearchDashBoard(props) {
     fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: queryObj != null ? queryObj.toJson() : null
+      body: queryObj != null ? queryObj.toJson() : null,
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           const elasticResponse = convertToElasticResponse(result);
           elasticContext.elastic.initializeElasticFromSearch(elasticResponse);
           console.log("Fetched complete");
           setElasticContext({ elastic: elasticContext.elastic });
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
   };
-  const convertToElasticResponse = result => {
+  const convertToElasticResponse = (result) => {
     const elasticResponse = new ElasticResponse(result.hits.total.value);
     elasticResponse.responseDocuments = [];
-    result.hits.hits.forEach(element => {
+    result.hits.hits.forEach((element) => {
       elasticResponse.responseDocuments.push(element._source);
     });
     if (result.aggregations) {
       const responseAggregations = [];
-      Object.keys(result.aggregations).map(key => {
+      Object.keys(result.aggregations).forEach((key) => {
         const elasticAggregation = new ElasticAggregationResult();
         elasticAggregation.name = key;
         elasticAggregation.values = result.aggregations[key].buckets;
@@ -77,10 +72,17 @@ export default function SearchDashBoard(props) {
     <ElasticContext.Provider
       value={{
         elastic: elasticContext.elastic,
-        performSearch: performSearch
+        performSearch: performSearch,
       }}
     >
       {props.children}
     </ElasticContext.Provider>
   );
 }
+
+SearchDashBoard.propTypes = {
+  metadataFields: PropTypes.object,
+  children: PropTypes.element,
+};
+
+export default SearchDashBoard;
