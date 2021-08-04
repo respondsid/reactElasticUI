@@ -1,13 +1,6 @@
 import React, { useContext } from "react";
-import {
-  Card,
-  CardBody,
-  Col,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Row,
-} from "reactstrap";
+import { Card, CardBody, Col, Row } from "reactstrap";
+import Pagination from "react-responsive-pagination";
 import styled from "styled-components";
 import ElasticContext from "./../utils/context/ElasticContext";
 import SearchFacets from "./SearchFacets";
@@ -102,69 +95,12 @@ export default function SearchResultPane(props) {
     }
   };
 
-  const renderPageLinks = () => {
-    const pageLinks = [];
-
-    const pageRemaining =
-      context.elastic.totalNumberOfPages - context.elastic.pageNumber;
-    const numberOfLinksToShow =
-      pageRemaining > context.elastic.paginationSize
-        ? context.elastic.paginationSize
-        : pageRemaining;
-    const startPage =
-      (Math.ceil(context.elastic.pageNumber / context.elastic.paginationSize) -
-        1) *
-      context.elastic.paginationSize;
-    for (let i = startPage; i < startPage + numberOfLinksToShow; i++) {
-      pageLinks.push(
-        <PaginationItem active={context.elastic.pageNumber === i + 1}>
-          <PaginationLink
-            onClick={() => {
-              handlePageClick(i + 1);
-            }}
-          >
-            {i + 1}
-          </PaginationLink>
-        </PaginationItem>
-      );
-    }
-    return pageLinks;
-  };
-
   const drawPagination = () => (
-    <div>
-      <Pagination aria-label="Page navigation example">
-        <PaginationItem>
-          <PaginationLink
-            first
-            onClick={() => {
-              handlePageClick(1);
-            }}
-          />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            previous
-            onClick={() => {
-              handlePageClick(context.elastic.pageNumber - 1);
-            }}
-          />
-        </PaginationItem>
-
-        {renderPageLinks()}
-        <PaginationItem>
-          <PaginationLink
-            next
-            onClick={() => {
-              handlePageClick(context.elastic.pageNumber + 1);
-            }}
-          />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink last href="#" />
-        </PaginationItem>
-      </Pagination>
-    </div>
+    <Pagination
+      current={context.elastic.pageNumber}
+      total={context.elastic.totalNumberOfPages}
+      onPageChange={handlePageClick}
+    />
   );
 
   return (
