@@ -3,7 +3,7 @@ export class ElasticQueryBuilder {
     this._source = [];
     this.query = {};
     this.aggs = {};
-    this.size = 20;
+    this.size = 10;
     this.from = 0;
     this.collection = "";
     this.toJson = this.toJson.bind(this);

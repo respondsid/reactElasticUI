@@ -21,34 +21,33 @@ function SearchDashBoard(props) {
     });
   }; */
 
-  const performSearch = () => {
+  const performSearch = async (resetPage = true) => {
     elasticContext.elastic.appendCheckedSelectionFilters();
+    if (resetPage) {
+      elasticContext.elastic.pageNumber = 1;
+      elasticContext.elastic.elasticQuery.from = 0;
+    }
     const queryObj = elasticContext.elastic.getElasticQuery();
+
     const url =
       "http://localhost:9200/" +
       queryObj.getCollection() +
       "/_search" +
       (queryObj != null ? queryObj.getMultiFieldQueryStr() : "");
-    fetch(url, {
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: queryObj != null ? queryObj.toJson() : null,
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          const elasticResponse = convertToElasticResponse(result);
-          elasticContext.elastic.initializeElasticFromSearch(elasticResponse);
-          console.log("Fetched complete");
-          setElasticContext({ elastic: elasticContext.elastic });
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    });
+    const response = await res.json();
+    const elasticResponse = convertToElasticResponse(response);
+    elasticContext.elastic.initializeElasticFromSearch(elasticResponse);
+    console.log("Fetched complete");
+    setElasticContext({ elastic: elasticContext.elastic });
   };
+
   const convertToElasticResponse = (result) => {
     const elasticResponse = new ElasticResponse(result.hits.total.value);
     elasticResponse.responseDocuments = [];

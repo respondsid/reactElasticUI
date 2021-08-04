@@ -17,6 +17,7 @@ export default class Elastic {
       this.appendCheckedSelectionFilters.bind(this);
     this.mergeAggregations = this.mergeAggregations.bind(this);
     this.initializeElasticFromMetadata();
+    this.paginationSize = 8;
   }
 
   getElasticQuery() {
@@ -61,14 +62,14 @@ export default class Elastic {
       this.searchResults = this.changeKeys(data.responseDocuments);
       this.elasticQuery.total = data.total;
       if (this.searchResults.length > data.total) {
-        this.pageNumber = 1;
         this.totalNumberOfPages = 1;
       } else {
-        this.pageNumber = 1;
-
         this.totalNumberOfPages = Math.ceil(
           data.total / this.elasticQuery.size
         );
+      }
+      if (this.elasticQuery.from === 0) {
+        this.pageNumber = 1;
       }
     }
     if (data && data.responseAggregations.length > 0) {
