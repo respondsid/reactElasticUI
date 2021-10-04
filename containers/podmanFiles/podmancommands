@@ -1,0 +1,13 @@
+podman pod create --name=ek  -p 9200:9200 -p5601:5601
+
+podman run --pod=ek  \
+-v ~/mnt/esData:/usr/share/elasticsearch/data:Z \
+-e xpack.security.enabled=false \
+-e discovery.type=single-node \
+-e http.cors.enabled=true \
+-e http.cors.allow-origin=* \
+--name es-container \
+-d docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+
+
+

@@ -1,0 +1,71 @@
+# Generation of Kubernetes YAML is still under development!
+#
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-3.3.0
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2021-10-04T03:04:33Z"
+  labels:
+    app: ek
+  name: ek
+spec:
+  containers:
+  - args:
+    - eswrapper
+    command:
+    - /bin/tini
+    - --
+    - /usr/local/bin/docker-entrypoint.sh
+    env:
+    - name: PATH
+      value: /usr/share/elasticsearch/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - name: TERM
+      value: xterm
+    - name: container
+      value: podman
+    - name: xpack.security.enabled
+      value: "false"
+    - name: discovery.type
+      value: single-node
+    - name: http.cors.enabled
+      value: "true"
+    - name: http.cors.allow-origin
+      value: '*'
+    - name: ELASTIC_CONTAINER
+      value: "true"
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+    name: es-container
+    ports:
+    - containerPort: 9200
+      hostPort: 9200
+      protocol: TCP
+    - containerPort: 5601
+      hostPort: 5601
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      privileged: false
+      readOnlyRootFilesystem: false
+      seLinuxOptions: {}
+    volumeMounts:
+    - mountPath: /usr/share/elasticsearch/data
+      name: home-siddharthdixit-mnt-esData-host-0
+    workingDir: /usr/share/elasticsearch
+  dnsConfig: {}
+  restartPolicy: Never
+  volumes:
+  - hostPath:
+      path: /home/siddharthdixit/mnt/esData
+      type: Directory
+    name: home-siddharthdixit-mnt-esData-host-0
+status: {}
+
