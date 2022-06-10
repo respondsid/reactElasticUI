@@ -20,6 +20,7 @@ const DetailValue = styled.div`
 const TopResultContainer = styled(Row)`
   border: 1px;
   border-style: dotted;
+  border-radius: 1em;
   border-color: #89a2f0;
   margin-bottom: 0.5em;
   &:hover {
@@ -104,7 +105,7 @@ export default function SearchResultPane(props) {
   );
 
   return (
-    <Card>
+    <Card style={{ borderRadius: "1em" }}>
       <CardBody>
         {!loaded ? (
           <div>loading</div>

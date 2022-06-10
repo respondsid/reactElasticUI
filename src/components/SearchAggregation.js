@@ -93,7 +93,7 @@ export default function SearchAggregation(props) {
 
   return (
     <div style={{ marginBottom: "1em" }}>
-      <Card>
+      <Card style={{ borderRadius: "1em" }}>
         <CardBody>
           {" "}
           {drawHeaderSection()}
