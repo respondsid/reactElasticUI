@@ -1,0 +1,158 @@
+[
+  {
+    "field_id": "ticker",
+    "field_name": "ticker",
+    "display_label": "Ticker",
+    "field_type": "MULTI",
+    "facet_ind": "false",
+    "collection": "securities"
+  },
+  {
+    "field_id": "name",
+    "field_name": "name",
+    "display_label": "Name",
+    "field_type": "MULTI",
+    "facet_ind": "false",
+    "collection": "securities"
+  },
+  {
+    "field_id": "Type",
+    "field_name": "type",
+    "display_label": "Asset Type",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "sector",
+    "field_name": "sector",
+    "display_label": "Sector",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "market_cap_billion",
+    "field_name": "Market Cap In Billion",
+    "field_type": "RANGE",
+    "range": [
+      { "to": 500, "key": " Less than 500" },
+      { "from": 500, "to": 1000, "key": "Between 500  and 1000" },
+      { "from": 1000, "to": 2000, "key": "Beetween 1000  and 2000" },
+      { "from": 2000, "key": "More than 2000" }
+    ],
+    "facet_ind": "true",
+    "collection": "securities",
+    "raw_ind": "false"
+  },
+  {
+    "field_id": "pe_ratio",
+    "field_name": "pe_ratio",
+    "display_label": "P/E Ratio",
+    "field_type": "MULTI",
+    "facet_ind": "false",
+    "collection": "securities"
+  },
+  {
+    "field_id": "1y_return_percent",
+    "field_name": "1y_return_percent",
+    "display_label": "1 Year return percent",
+    "field_type": "MULTI",
+    "facet_ind": "false",
+    "collection": "securities"
+  },
+  {
+    "field_id": "3y_return_percenttate",
+    "field_name": "3y_return_percent",
+    "display_label": "3 Years return percent",
+    "field_type": "Multi",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "morningstar_rating",
+    "field_name": "morningstar_rating",
+    "display_label": "Morning Star Ratins",
+    "field_type": "RANGE",
+    "range": [
+      { "to": "1", "key": "Less than 1" },
+      { "from": "1", "to": "3", "key": "Between 1 and  3" },
+      { "from": "3", "to": "4", "key": "Between 3 and 4" },
+      { "from": "4", "key": "More than 4" }
+    ],
+    "facet_ind": "true",
+    "collection": "securities",
+    "raw_ind": "false"
+  },
+  {
+    "field_id": "analyst_rating",
+    "field_name": "analyst_rating",
+    "display_label": "Analyst Rating",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "risk_level",
+    "field_name": "risk_level",
+    "display_label": "Risk Level",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "currency_cd",
+    "field_name": "currency_cd",
+    "display_label": "Currency",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "exchange_traded_notes",
+    "field_name": "exchange_traded_notes",
+    "display_label": "Exchange Traded Notes",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "index_fund_indicator",
+    "field_name": "index_fund_indicator",
+    "display_label": "Index Fund Indicator",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "closed_to_all_investors",
+    "field_name": "closed_to_all_investors",
+    "display_label": "Closed to All Investors",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "firm_name",
+    "field_name": "firm_name",
+    "display_label": "Firm Name",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },{
+    "field_id": "exchange_country_name",
+    "field_name": "exchange_country_name",
+    "display_label": "Exchange Country Name",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  },
+  {
+    "field_id": "closed_to_new_investors",
+    "field_name": "closed_to_new_investors",
+    "display_label": "Closed To New Investors",
+    "field_type": "MULTI",
+    "facet_ind": "true",
+    "collection": "securities"
+  }
+]

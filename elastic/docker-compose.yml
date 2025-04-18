@@ -2,18 +2,20 @@ version: "3.0"
 services:
   elasticsearch:
     container_name: es-container
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
     environment:
       - xpack.security.enabled=false
-      - "discovery.type=single-node"
-      - "http.cors.enabled=true"
-      - "http.cors.allow-origin=*"
+      - xpack.ml.enabled=false
+      - 'ES_JAVA_OPTS=-XX:UseSVE=0'
+      - 'CLI_JAVA_OPTS=-XX:UseSVE=0'
+
     networks:
       - es-net
     ports:
       - 9200:9200
     volumes:
-      - data01:/home/siddharthdixit/elastic/data
+      - data01:/home/dixitssm/elastic/data
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config
     deploy:
       resources:
         limits:
@@ -21,7 +23,7 @@ services:
           memory: 2548M
   kibana:
     container_name: kb-container
-    image: docker.elastic.co/kibana/kibana:7.11.0
+    image: docker.elastic.co/kibana/kibana:8.17.0
     environment:
       - ELASTICSEARCH_HOSTS=http://es-container:9200
     networks:
@@ -34,12 +36,12 @@ services:
       resources:
         limits:
           cpus: '1'
-          memory: 768M 
-  
+          memory: 2548M
+
 volumes:
   data01:
     driver: local
-    
+
 networks:
   es-net:
     driver: bridge

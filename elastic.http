@@ -1,4 +1,4 @@
-PUT http://localhost:9200/accounts?pretty=true HTTP/1.1
+PUT http://localhost:9200/securities?pretty=true HTTP/1.1
 Content-Type: application/json
 
 {
@@ -22,14 +22,14 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:9200/accounts/_bulk HTTP/1.1
+POST http://localhost:9200/securities/_bulk HTTP/1.1
 Content-Type: application/json
 
-< ./accounts.json 
+< ./elasticsearch_bulk_securities.ndjson
 
 ###
 
-PUT http://localhost:9200/employees?pretty=true HTTP/1.1
+PUT http://localhost:9200/securities?pretty=true HTTP/1.1
 Content-Type: application/json
 
 {
@@ -59,7 +59,7 @@ Content-Type: application/json
 < ./Employees50K.json
 
 ###
-GET http://localhost:9200/accounts
+GET http://localhost:9200/securities
 
 ###
 DELETE http://localhost:9200/accounts
