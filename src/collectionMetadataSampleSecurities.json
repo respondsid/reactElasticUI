@@ -33,13 +33,14 @@
   },
   {
     "field_id": "market_cap_billion",
-    "field_name": "Market Cap In Billion",
+    "field_name": "market_cap_billion",
+    "display_label": "Market Cap",
     "field_type": "RANGE",
     "range": [
-      { "to": 500, "key": " Less than 500" },
-      { "from": 500, "to": 1000, "key": "Between 500  and 1000" },
-      { "from": 1000, "to": 2000, "key": "Beetween 1000  and 2000" },
-      { "from": 2000, "key": "More than 2000" }
+      { "to": 500, "key": " Less than 500B" },
+      { "from": 500, "to": 1000, "key": "Between 500B and 1000B" },
+      { "from": 1000, "to": 2000, "key": "Beetween 1000B  and 2000B" },
+      { "from": 2000, "key": "More than 2000B" }
     ],
     "facet_ind": "true",
     "collection": "securities",
@@ -66,7 +67,7 @@
     "field_name": "3y_return_percent",
     "display_label": "3 Years return percent",
     "field_type": "Multi",
-    "facet_ind": "true",
+    "facet_ind": "false",
     "collection": "securities"
   },
   {
@@ -113,7 +114,7 @@
     "field_name": "exchange_traded_notes",
     "display_label": "Exchange Traded Notes",
     "field_type": "MULTI",
-    "facet_ind": "true",
+    "facet_ind": "false",
     "collection": "securities"
   },
   {
@@ -123,6 +124,7 @@
     "field_type": "MULTI",
     "facet_ind": "true",
     "collection": "securities"
+    
   },
   {
     "field_id": "closed_to_all_investors",
